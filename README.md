@@ -1,4 +1,4 @@
 # Практическая работа №12 (1 уровень)
 ## Мальев Никита Иванович (2 уровень)
 ### ИС-22А (3 уровень)
-![Фото](https://github.com/Malev20/GIT_PR12/edit/main/IS22A_Malev_NI.png)
+![Фото](https://github.com/Malev20/GIT_PR12/blob/main/IS22A_Malev_NI.png)
