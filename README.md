@@ -15,8 +15,48 @@ __Специальность 09.02.07__
 ![Фото](https://github.com/Malev20/GIT_PR12/blob/main/IS22A_Malev_NI.png)
 
 [Клик 🎦](https://github.com/Malev20/GIT_PR12)
-`public AdminForm()
+
+`private void RestoreDatabaseStructure()
         {
-            InitializeComponent();
-            FillComboBox();
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "SQL files (*.sql)|*.sql";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    conn.Open();
+
+                    string[] lines = File.ReadAllLines(dialog.FileName);
+                    string currentCommand = "";
+
+                    foreach (string line in lines)
+                    {
+                        if (string.IsNullOrWhiteSpace(line) || line.Trim().StartsWith("--"))
+                            continue;
+
+                        currentCommand += line;
+
+                        if (line.Trim().EndsWith(";"))
+                        {
+                            if (!string.IsNullOrWhiteSpace(currentCommand.Trim(';', ' ', '\t', '\r', '\n')))
+                            {
+                                MySqlCommand cmd = new MySqlCommand(currentCommand, conn);
+                                cmd.ExecuteNonQuery();
+                            }
+                            currentCommand = "";
+                        }
+                    }
+
+                    conn.Close();
+                    MessageBox.Show("Структура БД была восстановлена!");
+                    SelectTable.Items.Clear();
+                    FillComboBox();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+            }
         }`
