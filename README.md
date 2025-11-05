@@ -16,7 +16,8 @@ __Специальность 09.02.07__
 
 [Клик 🎦](https://github.com/Malev20/GIT_PR12)
 
-`private void RestoreDatabaseStructure()
+`
+private void RestoreDatabaseStructure()
         {
             try
             {
